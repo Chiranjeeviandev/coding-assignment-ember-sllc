@@ -40,7 +40,7 @@ public class LoginPresenter {
 
                     @Override
                     public void onNext(LoginResponse loginResponse) {
-                        loginNavigator.onSuccess();
+                        loginNavigator.onSuccess(loginResponse.getStatusCode());
                     }
                 });
     }

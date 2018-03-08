@@ -38,6 +38,18 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
+
+        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_NEXT ) {
+                    mPasswordView.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -167,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(int statusCode) {
         showProgress(false);
         Toast.makeText(this,"Log in Success",Toast.LENGTH_LONG).show();
     }
